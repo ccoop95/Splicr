@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DADADA">
+    <ImageView
+        android:src="@drawable/splicr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/splicrimage"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:paddingBottom="50dp"
+        android:paddingTop="25dp"
+        android:adjustViewBounds="true" />
+    <Button
+        android:text="Splice a Bill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newSplice"
+        android:paddingBottom="25dp"
+        android:paddingTop="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#D10000"
+        android:textSize="24sp" />
+    <Button
+        android:text="View Spliced Bills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewSplices"
+        android:paddingBottom="25dp"
+        android:paddingTop="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#D10000"
+        android:textSize="24sp" />
+    <Button
+        android:text="Login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:paddingBottom="25dp"
+        android:paddingTop="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="25dp"
+        android:background="#D10000"
+        android:textSize="24sp" />
+</LinearLayout>
