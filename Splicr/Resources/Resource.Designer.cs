@@ -63,6 +63,12 @@ namespace Splicr
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f050005
+			public const int NumPeople = 2131034117;
+			
+			// aapt resource value: 0x7f050007
+			public const int Tax = 2131034119;
+			
 			// aapt resource value: 0x7f050003
 			public const int login = 2131034115;
 			
@@ -71,6 +77,12 @@ namespace Splicr
 			
 			// aapt resource value: 0x7f050000
 			public const int splicrimage = 2131034112;
+			
+			// aapt resource value: 0x7f050004
+			public const int txtPeople = 2131034116;
+			
+			// aapt resource value: 0x7f050006
+			public const int txtTax = 2131034118;
 			
 			// aapt resource value: 0x7f050002
 			public const int viewSplices = 2131034114;
