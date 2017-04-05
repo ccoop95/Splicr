@@ -63,29 +63,29 @@ namespace Splicr
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050005
-			public const int NumPeople = 2131034117;
+			// aapt resource value: 0x7f050002
+			public const int NumPeople = 2131034114;
+			
+			// aapt resource value: 0x7f050004
+			public const int Tax = 2131034116;
 			
 			// aapt resource value: 0x7f050007
-			public const int Tax = 2131034119;
+			public const int login = 2131034119;
 			
-			// aapt resource value: 0x7f050003
-			public const int login = 2131034115;
-			
-			// aapt resource value: 0x7f050001
-			public const int newSplice = 2131034113;
+			// aapt resource value: 0x7f050005
+			public const int newSplice = 2131034117;
 			
 			// aapt resource value: 0x7f050000
 			public const int splicrimage = 2131034112;
 			
-			// aapt resource value: 0x7f050004
-			public const int txtPeople = 2131034116;
+			// aapt resource value: 0x7f050001
+			public const int txtPeople = 2131034113;
+			
+			// aapt resource value: 0x7f050003
+			public const int txtTax = 2131034115;
 			
 			// aapt resource value: 0x7f050006
-			public const int txtTax = 2131034118;
-			
-			// aapt resource value: 0x7f050002
-			public const int viewSplices = 2131034114;
+			public const int viewSplices = 2131034118;
 			
 			static Id()
 			{
@@ -101,10 +101,13 @@ namespace Splicr
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int AddMember = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int NewSplice = 2130903041;
+			public const int Main = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int NewSplice = 2130903042;
 			
 			static Layout()
 			{
