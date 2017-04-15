@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DADADA">
+    <ImageView
+        android:src="@drawable/splicr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/splicrimage"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:paddingBottom="50dp"
+        android:paddingTop="25dp"
+        android:adjustViewBounds="true" />
+    <TextView
+        android:text="Username"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtUsername"
+        android:gravity="center"
+        android:textColor="#D10000" />
+    <EditText
+        android:inputType="textPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:gravity="center"
+        android:background="#BFBFBF"
+        android:textColor="#000000" />
+    <TextView
+        android:text="Password"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPassword"
+        android:gravity="center"
+        android:textColor="#D10000" />
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:gravity="center"
+        android:background="#BFBFBF"
+        android:textColor="#000000" />
+    <Button
+        android:text="Login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginButton"
+        android:paddingBottom="25dp"
+        android:paddingTop="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="40dp"
+        android:background="#D10000"
+        android:textSize="24sp" />
+    <Button
+        android:text="Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newAccount" />
+</LinearLayout>
