@@ -23,6 +23,15 @@ namespace Splicr
         string loginString = "http://149.56.141.74/index.php/api/v1/login";
         string getMealsString = "http://149.56.141.74/index.php/api/v1/getmeals";
         string username;
+        int userId;
+        int numPeople;
+        int mealId;
+        double mealsCost;
+        double tipPercent;
+        double tipAmount;
+        double taxPercent;
+        double taxAmount;
+        double totalCost;
         protected override void OnCreate(Bundle bundle)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -75,6 +84,10 @@ namespace Splicr
             EditText tax = FindViewById<EditText>(Resource.Id.Tax);
             EditText tip = FindViewById<EditText>(Resource.Id.Tip);
             Button newMeal = FindViewById<Button>(Resource.Id.spliceBill);
+            mealsCost = double.Parse(mealCost.Text);
+            numPeople = int.Parse(people.Text);
+            taxPercent = double.Parse(tax.Text);
+            tipPercent = double.Parse(tip.Text);
 
         }
         public async Task<String> LoginASync()
@@ -96,9 +109,12 @@ namespace Splicr
             if (response != null || response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();
-                if(content.Equals("{\"status\":\"success\"}"))
+                if(!content.Equals("{\"status\":\"failed\"}"))
                 {
                     username = loginUsername.Text;
+                    JObject userIdObject = JObject.Parse(content);
+                    userId = (int)userIdObject["id"];
+
                     return "success";
                 }
                 else
