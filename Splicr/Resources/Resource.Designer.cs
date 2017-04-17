@@ -69,11 +69,23 @@ namespace Splicr
 			// aapt resource value: 0x7f05000f
 			public const int Tip = 2131034127;
 			
+			// aapt resource value: 0x7f050014
+			public const int email = 2131034132;
+			
 			// aapt resource value: 0x7f050005
-			public const int login = 2131034117;
+			public const int loginButton = 2131034117;
+			
+			// aapt resource value: 0x7f050004
+			public const int loginPassword = 2131034116;
+			
+			// aapt resource value: 0x7f050002
+			public const int loginUsername = 2131034114;
 			
 			// aapt resource value: 0x7f05000a
 			public const int mealCost = 2131034122;
+			
+			// aapt resource value: 0x7f050006
+			public const int newAccount = 2131034118;
 			
 			// aapt resource value: 0x7f050007
 			public const int newSplice = 2131034119;
@@ -81,17 +93,20 @@ namespace Splicr
 			// aapt resource value: 0x7f05000b
 			public const int numPeople = 2131034123;
 			
-			// aapt resource value: 0x7f050004
-			public const int password = 2131034116;
+			// aapt resource value: 0x7f050012
+			public const int password = 2131034130;
 			
-			// aapt resource value: 0x7f050006
-			public const int register = 2131034118;
+			// aapt resource value: 0x7f050015
+			public const int register = 2131034133;
 			
 			// aapt resource value: 0x7f050010
 			public const int spliceBill = 2131034128;
 			
 			// aapt resource value: 0x7f050000
 			public const int splicrimage = 2131034112;
+			
+			// aapt resource value: 0x7f050013
+			public const int txtEmail = 2131034131;
 			
 			// aapt resource value: 0x7f050003
 			public const int txtPassword = 2131034115;
@@ -108,8 +123,8 @@ namespace Splicr
 			// aapt resource value: 0x7f050001
 			public const int txtUsername = 2131034113;
 			
-			// aapt resource value: 0x7f050002
-			public const int username = 2131034114;
+			// aapt resource value: 0x7f050011
+			public const int username = 2131034129;
 			
 			// aapt resource value: 0x7f050008
 			public const int viewSplices = 2131034120;

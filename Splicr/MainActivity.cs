@@ -22,41 +22,99 @@ namespace Splicr
     {
         string loginString = "http://149.56.141.74/index.php/api/v1/login";
         string getMealsString = "http://149.56.141.74/index.php/api/v1/getmeals";
+        string username;
         protected override void OnCreate(Bundle bundle)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(bundle);
             // Set our view from the "main" layout resource
-            SetContentView (Resource.Layout.Main);
+            SetContentView (Resource.Layout.Login);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
             Button newAccount = FindViewById<Button>(Resource.Id.newAccount);
-            Button register = FindViewById<Button>(Resource.Id.register);
+           /* Button register = FindViewById<Button>(Resource.Id.register);
             Button newSplice = FindViewById<Button>(Resource.Id.newSplice);
             Button newMeal = FindViewById<Button>(Resource.Id.spliceBill);
             Button viewSplices = FindViewById<Button>(Resource.Id.viewSplices);
             EditText mealCost = FindViewById<EditText>(Resource.Id.mealCost);
             EditText people = FindViewById<EditText>(Resource.Id.numPeople);
             EditText tax = FindViewById<EditText>(Resource.Id.Tax);
-            EditText tip = FindViewById<EditText>(Resource.Id.Tip);
+            EditText tip = FindViewById<EditText>(Resource.Id.Tip);*/
+            
 
 
-            newSplice.Click += delegate {
-                SetContentView(Resource.Layout.NewSplice);
-            };
-            /*newMeal.Click += delegate {
-                string url = "ADD URL HERE" +
-                 mealCost.Text +
-                 "&lng=" +
-                 longitude.Text +
-                 "&username=demo";
-                JsonValue json = await AddMeal(url);
+            login.Click += LoginButton_Click;
 
-            };*/
         }
         /*private async Task<JsonValue> AddMeal(string url)
         {
 
         }*/
+        private async void LoginButton_Click(object sender, EventArgs e)
+        {
+            string loggedIn = await LoginASync();
+            if (loggedIn.Equals("success"))
+            {
+                SetContentView(Resource.Layout.Main);
+
+                Button newSplice = FindViewById<Button>(Resource.Id.newSplice);
+                newSplice.Click += createNewSplice;
+            }
+            else
+            {
+                SetContentView(Resource.Layout.Login);
+                Button login = FindViewById<Button>(Resource.Id.loginButton);
+                Button newAccount = FindViewById<Button>(Resource.Id.newAccount);
+                login.Click += LoginButton_Click;
+            }
+        }
+        public void createNewSplice(object sender, EventArgs e)
+        {
+            SetContentView(Resource.Layout.NewSplice);
+            EditText mealCost = FindViewById<EditText>(Resource.Id.mealCost);
+            EditText people = FindViewById<EditText>(Resource.Id.numPeople);
+            EditText tax = FindViewById<EditText>(Resource.Id.Tax);
+            EditText tip = FindViewById<EditText>(Resource.Id.Tip);
+            Button newMeal = FindViewById<Button>(Resource.Id.spliceBill);
+
+        }
+        public async Task<String> LoginASync()
+        {
+            EditText loginUsername = FindViewById<EditText>(Resource.Id.loginUsername);
+            EditText loginPassword = FindViewById<EditText>(Resource.Id.loginPassword);
+            JObject loginDetails = new JObject();
+            loginDetails.Add("username", loginUsername.Text);
+            loginDetails.Add("password", loginPassword.Text);
+            JObject successObject = new JObject();
+            successObject.Add("status", "success");
+            HttpClient loginClient = new HttpClient();
+            var settings = new JsonSerializerSettings();
+            settings.ContractResolver = new SplicrContractResolver();
+            var loginJson = JsonConvert.SerializeObject(loginDetails, Formatting.Indented);
+            var successJson = JsonConvert.SerializeObject(successObject, Formatting.Indented);
+            StringContent jsonContent = new StringContent(loginJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await loginClient.PostAsync(loginString, jsonContent);
+            if (response != null || response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                if(content.Equals("{\"status\":\"success\"}"))
+                {
+                    username = loginUsername.Text;
+                    return "success";
+                }
+                else
+                {
+                    return "failure";
+                }
+            }
+            return null;
+        }
+        public class SplicrContractResolver : DefaultContractResolver
+        {
+            protected override string ResolvePropertyName(string propertyName)
+            {
+                return propertyName.ToLower();
+            }
+        }
     }
 }
 
