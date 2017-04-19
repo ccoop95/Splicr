@@ -108,6 +108,9 @@ namespace Splicr
 			// aapt resource value: 0x7f050000
 			public const int splicrimage = 2131034112;
 			
+			// aapt resource value: 0x7f050016
+			public const int testViewData = 2131034134;
+			
 			// aapt resource value: 0x7f050013
 			public const int txtEmail = 2131034131;
 			

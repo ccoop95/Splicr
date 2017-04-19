@@ -20,10 +20,10 @@ namespace Splicr
     [Activity(Label = "Splicr", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        string registerString = "http://149.56.141.74/index.php/api/v1/register";
-        string loginString = "http://149.56.141.74/index.php/api/v1/login";
-        string getMealsString = "http://149.56.141.74/index.php/api/v1/getmeals";
-        string addMealString = "http://149.56.141.74/index.php/api/v1/meal";
+        string registerString = "http://imcoop.ca/index.php/api/v1/register";
+        string loginString = "http://imcoop.ca/index.php/api/v1/login";
+        string getMealsString = "http://imcoop.ca/index.php/api/v1/getmeals";
+        string addMealString = "http://imcoop.ca/index.php/api/v1/meal";
         string username;
         int userId;
         int numPeople;
@@ -35,6 +35,8 @@ namespace Splicr
         double taxAmount;
         double totalCost;
         double eachCost;
+        List<Meal> mealListData = new List<Meal>();
+        JObject testData = new JObject();
         protected override void OnCreate(Bundle bundle)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -69,7 +71,10 @@ namespace Splicr
                 SetContentView(Resource.Layout.Main);
                 
                 Button newSplice = FindViewById<Button>(Resource.Id.newSplice);
+                Button viewSplices = FindViewById<Button>(Resource.Id.viewSplices);
                 newSplice.Click += createNewSplice;
+
+                viewSplices.Click += viewSplicesButton_Click;
             }
             else
             {
@@ -126,7 +131,7 @@ namespace Splicr
             string mealAdded = await AddMealAsync();
             if (mealAdded.Equals("success"))
             {
-                SetContentView(Resource.Layout.ViewAllSplices);
+                viewAllTheSplices();
             }
             else
             {
@@ -134,6 +139,66 @@ namespace Splicr
                 Button newMeal = FindViewById<Button>(Resource.Id.spliceBill);
                 newMeal.Click += newMealButton_Click;
             }
+        }
+
+        public void viewSplicesButton_Click(object sender, EventArgs e)
+        {
+            viewAllTheSplices();
+        }
+
+        public async void viewAllTheSplices()
+        {
+            string mealsRetrieved = await getAllTheSplices();
+            if (mealsRetrieved.Equals("success"))
+            {
+                SetContentView(Resource.Layout.ViewAllSplices);
+                TextView testDataText = FindViewById<TextView>(Resource.Id.testViewData);
+                testDataText.Text = testData.ToString();
+            }
+            else
+            {
+                SetContentView(Resource.Layout.NewSplice);
+                Button newMeal = FindViewById<Button>(Resource.Id.spliceBill);
+                newMeal.Click += newMealButton_Click;
+            }
+        }
+
+        public async Task<String> getAllTheSplices()
+        {
+            var settings = new JsonSerializerSettings();
+            JObject userIdDetails = new JObject();
+            userIdDetails.Add("userid", userId.ToString());
+            HttpClient getMealsCleint = new HttpClient();
+            settings.ContractResolver = new SplicrContractResolver();
+            var getMealsJson = JsonConvert.SerializeObject(userIdDetails, Formatting.Indented);
+            StringContent jsonContent = new StringContent(getMealsJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await getMealsCleint.PostAsync(getMealsString, jsonContent);
+            if (response != null || response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                if (content != null)
+                {
+                    
+                    testData = JObject.Parse(content);
+                   /* dynamic meals = JsonConvert.DeserializeObject(content);
+                    foreach(var meal in meals)
+                    {
+                        mealListData.Add(meal.id);
+                        mealListData.Add(meal.mealcost);
+                        mealListData.Add(meal.people);
+                        mealListData.Add(meal.taxpercent);
+                        mealListData.Add(meal.tippercent);
+                        mealListData.Add(meal.totalcost);
+                        mealListData.Add(meal.userid);
+                    } */
+                    return "success";
+                }
+                else
+                {
+                    return "failure";
+                }
+            }
+            return null;
         }
 
         public async Task<String> RegisterAsync()

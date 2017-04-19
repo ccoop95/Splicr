@@ -2,6 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="#DADADA">
+    <ImageView
+        android:src="@drawable/splicr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/splicrimage"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:paddingBottom="25dp"
+        android:paddingTop="25dp"
+        android:adjustViewBounds="true" />
+    <TextView
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/testViewData"
+        android:textColor="#D10000"/>
 </LinearLayout>

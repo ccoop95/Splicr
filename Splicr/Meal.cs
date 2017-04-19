@@ -14,12 +14,12 @@ namespace Splicr
 {
     class Meal
     {
-        public int Id { get; set; }
-        public double? MealCost { get; set; }
-        public int People { get; set; }
-        public double? TaxPercent { get; set; }
-        public double? TipPercent { get; set; }
-        public double? TotalCost { get; set; }
-        public int UserId { get; set; }
+        public int id { get; set; }
+        public string mealCost { get; set; }
+        public int people { get; set; }
+        public string taxPercent { get; set; }
+        public string tipPercent { get; set; }
+        public string totalCost { get; set; }
+        public int userId { get; set; }
     }
 }
