@@ -37,6 +37,7 @@ namespace Splicr
         double eachCost;
         List<Meal> mealListData = new List<Meal>();
         JObject testData = new JObject();
+        String testString;
         protected override void OnCreate(Bundle bundle)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -131,7 +132,7 @@ namespace Splicr
             string mealAdded = await AddMealAsync();
             if (mealAdded.Equals("success"))
             {
-                viewAllTheSplices();
+                viewAddedSplice();
             }
             else
             {
@@ -139,6 +140,21 @@ namespace Splicr
                 Button newMeal = FindViewById<Button>(Resource.Id.spliceBill);
                 newMeal.Click += newMealButton_Click;
             }
+        }
+
+        public void viewAddedSplice()
+        {
+            SetContentView(Resource.Layout.ViewSplice);
+            TextView totalMealCost = FindViewById<TextView>(Resource.Id.totalMealCost);
+            TextView totalTaxCost = FindViewById<TextView>(Resource.Id.totalTaxCost);
+            TextView totalTipCost = FindViewById<TextView>(Resource.Id.totalTipCost);
+            TextView pricePerPerson = FindViewById<TextView>(Resource.Id.costPerPerson);
+            totalMealCost.Text = totalCost.ToString();
+            totalTaxCost.Text = taxAmount.ToString();
+            totalTipCost.Text = tipAmount.ToString();
+            pricePerPerson.Text = eachCost.ToString();
+            Button returnHome = FindViewById<Button>(Resource.Id.mainScreen);
+            returnHome.Click += mainPageButton_Clicked;
         }
 
         public void viewSplicesButton_Click(object sender, EventArgs e)
@@ -149,25 +165,39 @@ namespace Splicr
         public async void viewAllTheSplices()
         {
             string mealsRetrieved = await getAllTheSplices();
-            if (mealsRetrieved.Equals("success"))
-            {
-                SetContentView(Resource.Layout.ViewAllSplices);
-                TextView testDataText = FindViewById<TextView>(Resource.Id.testViewData);
-                testDataText.Text = testData.ToString();
-            }
-            else
-            {
-                SetContentView(Resource.Layout.NewSplice);
-                Button newMeal = FindViewById<Button>(Resource.Id.spliceBill);
-                newMeal.Click += newMealButton_Click;
-            }
+             if (mealsRetrieved.Equals("success"))
+             {
+                 SetContentView(Resource.Layout.ViewAllSplices);
+                 TextView testDataText = FindViewById<TextView>(Resource.Id.testViewData);
+                 testDataText.Text = testString;
+                Button mainPageButton = FindViewById<Button>(Resource.Id.mainPage);
+                mainPageButton.Click += mainPageButton_Clicked;
+
+             }
+             else
+             {
+                 SetContentView(Resource.Layout.NewSplice);
+                 Button newMeal = FindViewById<Button>(Resource.Id.spliceBill);
+                 newMeal.Click += newMealButton_Click;
+             }
+        }
+
+        public void mainPageButton_Clicked(object sender, EventArgs e)
+        {
+            SetContentView(Resource.Layout.Main);
+
+            Button newSplice = FindViewById<Button>(Resource.Id.newSplice);
+            Button viewSplices = FindViewById<Button>(Resource.Id.viewSplices);
+            newSplice.Click += createNewSplice;
+
+            viewSplices.Click += viewSplicesButton_Click;
         }
 
         public async Task<String> getAllTheSplices()
         {
             var settings = new JsonSerializerSettings();
             JObject userIdDetails = new JObject();
-            userIdDetails.Add("userid", userId.ToString());
+            userIdDetails.Add("userid", 1);
             HttpClient getMealsCleint = new HttpClient();
             settings.ContractResolver = new SplicrContractResolver();
             var getMealsJson = JsonConvert.SerializeObject(userIdDetails, Formatting.Indented);
@@ -175,12 +205,17 @@ namespace Splicr
             HttpResponseMessage response = await getMealsCleint.PostAsync(getMealsString, jsonContent);
             if (response != null || response.IsSuccessStatusCode)
             {
+                SetContentView(Resource.Layout.ViewAllSplices);
                 string content = await response.Content.ReadAsStringAsync();
                 if (content != null)
                 {
+                    string trimmedContent = content.Trim(new Char[] { '[', ']' });
+                    var count = trimmedContent.Count(x => x == '{');
                     
-                    testData = JObject.Parse(content);
-                   /* dynamic meals = JsonConvert.DeserializeObject(content);
+                   // testData = JObject.Parse(trimmedContent);
+                    testString = trimmedContent;
+                    //testData = JObject.Parse(content);
+                    /*dynamic meals = JsonConvert.DeserializeObject(content);
                     foreach(var meal in meals)
                     {
                         mealListData.Add(meal.id);
@@ -190,13 +225,13 @@ namespace Splicr
                         mealListData.Add(meal.tippercent);
                         mealListData.Add(meal.totalcost);
                         mealListData.Add(meal.userid);
-                    } */
+                    }*/
                     return "success";
-                }
-                else
-                {
-                    return "failure";
-                }
+                    }
+                    else
+                    {
+                        return "failure";
+                    }
             }
             return null;
         }

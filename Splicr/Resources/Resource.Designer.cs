@@ -69,6 +69,9 @@ namespace Splicr
 			// aapt resource value: 0x7f05000f
 			public const int Tip = 2131034127;
 			
+			// aapt resource value: 0x7f05001b
+			public const int costPerPerson = 2131034139;
+			
 			// aapt resource value: 0x7f050005
 			public const int loginButton = 2131034117;
 			
@@ -77,6 +80,12 @@ namespace Splicr
 			
 			// aapt resource value: 0x7f050002
 			public const int loginUsername = 2131034114;
+			
+			// aapt resource value: 0x7f050017
+			public const int mainPage = 2131034135;
+			
+			// aapt resource value: 0x7f05001c
+			public const int mainScreen = 2131034140;
 			
 			// aapt resource value: 0x7f05000a
 			public const int mealCost = 2131034122;
@@ -110,6 +119,15 @@ namespace Splicr
 			
 			// aapt resource value: 0x7f050016
 			public const int testViewData = 2131034134;
+			
+			// aapt resource value: 0x7f050018
+			public const int totalMealCost = 2131034136;
+			
+			// aapt resource value: 0x7f050019
+			public const int totalTaxCost = 2131034137;
+			
+			// aapt resource value: 0x7f05001a
+			public const int totalTipCost = 2131034138;
 			
 			// aapt resource value: 0x7f050013
 			public const int txtEmail = 2131034131;
@@ -159,6 +177,9 @@ namespace Splicr
 			
 			// aapt resource value: 0x7f030004
 			public const int ViewAllSplices = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int ViewSplice = 2130903045;
 			
 			static Layout()
 			{
